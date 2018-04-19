@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Word Guess Game</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+
+    <body>
+
+        <!-- <button onclick="myFunction()">Click me</button> -->
+
+        <div id="game"></div>
+
+        <div id="underscores"></div>
+
+        <script>
+
+
+            // window.onload = function start() {
+
+            var words = ["horse", "pig", "dog", "cat", "parrot", "iguana", "abcdefgabcdefg"];
+
+            var guesses = [];
+            var underScores = [];
+            var j = 0;
+            var y;
+            var x = Math.floor(Math.random() * words.length);
+            var numGuesses = 0;
+            var justLet = /^[a-z]+$/i;
+            var fullUnder = " "
+            var indWord = [];
+            var userGuess;
+            var maxScore = 6;
+            var indexes = [];
+
+            //var fullUnders;
+
+
+
+            // when key is pressed 
+            document.onkeyup = function (event) {
+
+                userGuess = event.key
+                if ((userGuess.match(justLet)) /*|| (userGuess !=== ) */) {
+                    //var numGuesses = 0
+
+                    //console.log(userGuess)
+                    guesses.push(userGuess)
+                    //console.log(numGuesses)
+                    numGuesses++
+                }
+
+            }
+
+            // gets the number of " _ " in a word and put them in array
+            function getUnders(ranNum) {
+                for (var i = 0; i < words[ranNum].length; i++) {
+                    var underScore = "_ ";
+
+                    underScores.push(underScore);
+                }
+                for (var i = 0; i < underScores.length; i++) {
+
+                    fullUnder = fullUnder + underScores[i];
+                    //console.log(fullUnder)
+                }
+                return fullUnder
+            }
+
+            getUnders(x)
+
+            // puts letters of random word into index
+            function wordIndex(ranNum) {
+                for (var i = 0; i < words[ranNum].length; i++) {
+                    var letter;
+                    letter = words[ranNum].charAt(i)
+                    indWord.push(letter)
+                    //console.log(letter)
+                    //console.log(indWord)
+                    //return letter
+                }
+                return letter
+            }
+
+            wordIndex(x)
+
+            /* function wordIndex(ranNum) {
+                 console.log(ranNum)
+             }
+ 
+             indWord.forEach(wordIndex); */
+
+
+
+
+            for (var i = 0; i < indWord.length; i++) {
+                //console.log(indWord[i])
+                if (userGuess === indWord[i]) {
+                    alert("got it")
+                }
+            }
+
+
+
+            function findMatch(userGuess) {
+                //if (userGuess = )
+            }
+
+            //listens for keypress
+            document.addEventListener("keyup", function () {
+                userGuess = event.key
+
+
+                
+                function getAllIndexes(arr, val) {
+                    var i = -1;
+                    while ((i = arr.indexOf(val, i + 1)) != -1) {
+                        indexes.push(i);
+                    }
+                }
+                getAllIndexes(indWord, userGuess);
+
+                function multValues(ranW) {
+                    for (var i = 0; i < indexes.length; i++) {
+                        underScores[indexes[i]] = underScores[indexes[i]].replace("_ ", userGuess);
+                        document.getElementById("underscores").innerHTML = underScores.join(" ");
+                    }
+                }
+                indexes.forEach(multValues);
+                
+               // indexes.forEach(function multValues())
+
+                var goodLet = indWord.indexOf(userGuess)
+
+
+                indWord.forEach(function wordIndex(ranNum) {
+                    
+                    if (userGuess === ranNum) {
+                        
+                        underScores[goodLet] = underScores[goodLet].replace("_ ", userGuess);
+                        document.getElementById("underscores").innerHTML = underScores.join(" ");
+                    }
+                });
+            }, false);
+
+            function updateUnders(fullUnder, indWord) {
+
+            }
+
+            //fullUnders = getUnders(x)
+            //document.getElementById("underscores") = fullUnders
+
+
+            // y = wordLength(x);
+            // console.log(y);
+
+            var html =
+                "<p>Word: "
+            "<p>Guesses: "
+
+            document.getElementById("underscores").innerHTML = underScores.join(" ");
+
+            document.querySelector("#game").innerHTML = html;
+            // }
+
+//focus on matching idividual keypress letters and try to math them to the indword[] array
+
+
+
+
+
+        </script>
+
+    </body>
+
+</html>

@@ -250,14 +250,10 @@ getUnders(x)
 document.addEventListener("keyup", function () {
     userGuess = event.key
     var upGuess = userGuess.toUpperCase();
-    if ((userGuess.match(justLet))) {
+    if (userGuess.match(justLet)) {
         guesses.push(upGuess)
         numGuesses++
-    }   else if(userGuess != indWord) {
-        maxScore--
-        console.log(maxScore)
-        document.getElementById("score").innerHTML = maxScore;
-    }
+    }   
     document.getElementById("score").innerHTML = maxScore;
     document.getElementById("guesses").innerHTML = guesses.join(", ");
 
@@ -281,6 +277,9 @@ document.addEventListener("keyup", function () {
     }
     indexes.forEach(multValues);
 
+    if (indWord.indexOf(userGuess) === -1) {
+        maxScore--
+    }
     //var goodLet = indWord.indexOf(userGuess)
 
     /* indWord.forEach(function wordIndex(ranNum) {

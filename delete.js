@@ -121,6 +121,7 @@ var words = [
     "Miniature Bull Terrier",
     "Miniature Pinscher",
     "Miniature Schnauzer",
+    "NAID Breed",
     "Neapolitan Mastiff",
     "Newfoundland",
     "Norfolk Terrier",
@@ -198,7 +199,7 @@ var j = 0;
 var y;
 var x = Math.floor(Math.random() * words.length);
 var numGuesses = 0;
-var justLet = /^[a-zA-Z]+$/i;
+var justLet = /^[a-z]+$/i;
 //var fullUnder = " "
 var indWord = [];
 var userGuess;
@@ -216,7 +217,20 @@ var spaceIndex = [];
     }
 } */
 
+// gets the number of " _ " in a word and put them in array
+ /* function getUnders(ranNum) {
+    for (var i = 0; i < words[ranNum].length; i++) {
+        var underScore = "_ ";
 
+        
+    }
+    /* for (var i = 0; i < underScores.length; i++) {
+        fullUnder = fullUnder + underScores[i];
+    }
+    return fullUnder 
+}
+
+getUnders(x) */
 
 // puts letters of random word into index
 function wordIndex(ranNum) {
@@ -224,29 +238,22 @@ function wordIndex(ranNum) {
         var letter;
         letter = words[ranNum].charAt(i)
 
-        if (letter.match(" ")) {
+        /*if (letter === " ") {
             spaceIndex.push(i)
             console.log(i)
-            console.log(spaceIndex)
         } else
-            indWord.push(letter)
+            indWord.push(letter)*/
+
+            if (letter.match(" ")) {
+                    underScores.push("-")
+                } else if ((letter.match(justLet))) {
+                    underScores.push("_ ");
+                    }
     }
     return letter
 }
 
 wordIndex(x)
-console.log(spaceIndex)
-
-// gets the number of " _ " in a word and put them in array
-function getUnders(ranNum) {
-    for (var i = 0; i < (words[ranNum].length); i++) {
-        var underScore = "_ ";
-        underScores.push(underScore);
-    }
-}
-
-getUnders(x)
-
 
 //listens for keypress
 document.addEventListener("keyup", function () {
@@ -254,13 +261,10 @@ document.addEventListener("keyup", function () {
 
     if ((userGuess.match(justLet))) {
         guesses.push(userGuess)
-    }
-
-    if ((userGuess.match(justLet))) {
         numGuesses++
     }
 
-    document.getElementById("guesses").innerHTML = guesses.join(", ");
+    document.getElementById("guesses").innerHTML = guesses;
 
     // gets index for letters
     function getAllIndexes(arr, val) {
@@ -268,17 +272,16 @@ document.addEventListener("keyup", function () {
 
         while ((i = arr.indexOf(val, i + 1)) != -1) {
             indexes.push(i);
+            console.log(i)
         }
     }
     getAllIndexes(indWord, userGuess);
-
 
     function multValues(ranW) {
         for (var i = 0; i < indexes.length; i++) {
             underScores[indexes[i]] = underScores[indexes[i]].replace("_ ", userGuess);
             document.getElementById("underscores").innerHTML = underScores.join(" ");
         }
-        
     }
     indexes.forEach(multValues);
 

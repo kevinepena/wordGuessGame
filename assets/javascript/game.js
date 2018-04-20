@@ -198,13 +198,15 @@ var j = 0;
 var y;
 var x = Math.floor(Math.random() * words.length);
 var numGuesses = 0;
-var justLet = /^[a-zA-Z]+$/i;
+//var justLet = /^[a-zA-Z]+$/i;
+var justLet =  /[>< \/!a-zA-Z]/
+
 //var fullUnder = " "
 var indWord = [];
 var userGuess;
 var maxScore = 6;
 var indexes = [];
-var spaceIndex = [];
+var spaceIndex = 0;
 
 
 // when key is pressed 
@@ -225,9 +227,7 @@ function wordIndex(ranNum) {
         letter = words[ranNum].charAt(i)
 
         if (letter.match(" ")) {
-            spaceIndex.push(i)
-            console.log(i)
-            console.log(spaceIndex)
+            spaceIndex++
         } else
             indWord.push(letter)
     }
@@ -235,11 +235,10 @@ function wordIndex(ranNum) {
 }
 
 wordIndex(x)
-console.log(spaceIndex)
 
 // gets the number of " _ " in a word and put them in array
 function getUnders(ranNum) {
-    for (var i = 0; i < (words[ranNum].length); i++) {
+    for (var i = 0; i < ((words[ranNum].length) - spaceIndex); i++) {
         var underScore = "_ ";
         underScores.push(underScore);
     }
@@ -247,19 +246,19 @@ function getUnders(ranNum) {
 
 getUnders(x)
 
-
 //listens for keypress
 document.addEventListener("keyup", function () {
     userGuess = event.key
-
+    var upGuess = userGuess.toUpperCase();
     if ((userGuess.match(justLet))) {
-        guesses.push(userGuess)
-    }
-
-    if ((userGuess.match(justLet))) {
+        guesses.push(upGuess)
         numGuesses++
+    }   else if(userGuess != indWord) {
+        maxScore--
+        console.log(maxScore)
+        document.getElementById("score").innerHTML = maxScore;
     }
-
+    document.getElementById("score").innerHTML = maxScore;
     document.getElementById("guesses").innerHTML = guesses.join(", ");
 
     // gets index for letters
@@ -271,14 +270,14 @@ document.addEventListener("keyup", function () {
         }
     }
     getAllIndexes(indWord, userGuess);
-
+    getAllIndexes(indWord, upGuess);
+   
 
     function multValues(ranW) {
         for (var i = 0; i < indexes.length; i++) {
             underScores[indexes[i]] = underScores[indexes[i]].replace("_ ", userGuess);
             document.getElementById("underscores").innerHTML = underScores.join(" ");
         }
-        
     }
     indexes.forEach(multValues);
 
@@ -292,9 +291,6 @@ document.addEventListener("keyup", function () {
     }); */
 }, false);
 
-function updateUnders(fullUnder, indWord) {
-
-}
 
 
 var html =

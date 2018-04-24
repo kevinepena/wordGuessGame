@@ -194,12 +194,11 @@ var words = [
 
 var guesses = [];
 var underScores = [];
-var j = 0;
-var y;
 var x = Math.floor(Math.random() * words.length);
 var numGuesses = 0;
+var justLet = /^[a-zA-Z]*$/;
 //var justLet = /^[a-zA-Z]+$/i;
-var justLet =  /[>< \/!a-zA-Z]/
+//var justLet =  /[>< \/!a-zA-Z]/
 
 //var fullUnder = " "
 var indWord = [];
@@ -245,6 +244,8 @@ function getUnders(ranNum) {
 }
 
 getUnders(x)
+document.getElementById("score").innerHTML = maxScore;
+//document.getElementById("score").innerHTML = maxScore;
 
 //listens for keypress
 document.addEventListener("keyup", function () {
@@ -254,7 +255,7 @@ document.addEventListener("keyup", function () {
         guesses.push(upGuess)
         numGuesses++
     }   
-    document.getElementById("score").innerHTML = maxScore;
+    
     document.getElementById("guesses").innerHTML = guesses.join(", ");
 
     // gets index for letters
@@ -277,26 +278,25 @@ document.addEventListener("keyup", function () {
     }
     indexes.forEach(multValues);
 
-    if (indWord.indexOf(userGuess) === -1) {
+    if (((indWord.indexOf(userGuess) === -1 )) && (guesses.indexOf(userGuess) === -1)) {
         maxScore--
+        document.getElementById("score").innerHTML = maxScore;
     }
-    //var goodLet = indWord.indexOf(userGuess)
 
-    /* indWord.forEach(function wordIndex(ranNum) {
-        if (userGuess === ranNum) {
-            underScores[goodLet] = underScores[goodLet].replace("_ ", userGuess);
-            document.getElementById("underscores").innerHTML = underScores.join(" ");
-        } 
-    }); */
 }, false);
 
 
 
 var html =
-    //"<p>Word: " 
-    //"<p>Guesses: "
-
     document.getElementById("underscores").innerHTML = underScores.join(" ");
 
 
-//document.querySelector("#game").innerHTML = html; 
+
+/*          NOTES TO SELF
+
+use letter-spacing on css, try em
+
+
+
+
+*/

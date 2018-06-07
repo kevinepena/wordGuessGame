@@ -4,31 +4,62 @@
 <head>
     <meta charset="UTF-8">
     <title>Word Guess Game</title>
-    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+    <!-- <link rel="stylesheet" type="text/css" href="assets/css/reset.css"> -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
 
     <body>
-        <h1>Guess the dog!</h1>
-        <p>Word:
-        <div id="game"></div>
-        </p>
 
-        <p>
-        <div id="underscores"></div>
-        </p>
+        <div class="row">
+            <div class="col s6">
+                <h1>Guess the dog!</h1>
+            </div>
+            <div class="col s6"></div>
+        </div>
+        <div class="row">
+            <div class="col s3"></div>
+            <div class="col s3"></div>
+            <div class="col s3">
+            </div>
+            <div class="col s3"></div>
+        </div>
 
-        <p>Letter Bank:
-        <div id="guesses"></div>
-        </p>
 
-        <p>Tries Left:
-        <div id="score"></div>
-        </p>
 
+        <div id="word">
+            <p>Word:
+                <div id="word-blanks"></div>
+            </p>
+        </div>
+
+
+        <div id="stats" class="row">
+            <div class="col s3 center">
+                Letter Bank:
+                <div id="wrong-guesses"></div>
+            </div>
+            <div class="col s3 center">
+                Tries Left:
+                <div id="guesses-left"></div>
+            </div>
+            <div class="col s3 center">
+
+                Wins:
+                <div id="win-counter"></div>
+            </div>
+            <div class="col s3 center">
+
+                Losses:
+                <div id="loss-counter"></div>
+            </div>
+
+        </div>
 
         <script src="assets/javascript/game.js"></script>
 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
     </body>
 
 </html>

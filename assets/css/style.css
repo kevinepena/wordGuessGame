@@ -1,5 +1,21 @@
 body {
-    background-image: url("../pixeldog.gif");
+    background-color: #98B288;
+    background-image: url("../images/pixeldog.gif");
+    background-repeat: no-repeat;
     width: 100%;
-    letter-spacing: 1px;
+    font-family: 'Montserrat', sans-serif;
+
+}
+#word-blanks {
+    letter-spacing: 4px;
+}
+
+#word {
+    font-size: 30px;
+    margin-left: 10px;
+}
+
+#stats {
+    font-size: 30px;
+    margin-top: 175px;
 }
